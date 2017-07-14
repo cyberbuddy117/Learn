@@ -2,13 +2,16 @@
 Can use style attribute within HTML elements or
 Can place CSS within style HTML tags or
 Can place CSS in external style sheet (most common)
-Generic font familys include Monospace, Serif, Sans-Serif
+Generic font familys include Monospace, Serif, Sans-Serif, Cursive, and Fantasy
 Generic font family names are not case-sensitive and do not need quotes because they are CSS keywords.
+Web-safe Fonts: Sans-serif(Andale Mono, Arial, Arial Black, Century Gothic, Trebuchet MS, Verdana), Serif(Times New Roman, Georgia), Cursive(Comic Sans MS), Fantasy(ImpactL), Monospace(Courier New)
 multiple class declarations: <p class="class1 class2">
 Units of length: px / absolute in or mm / relative em or rem
 Highest specificity is to use !important keyword
 "CSS Rules" consist of the "selector" and all "declarations"
-"Declarations" consist of a "property" and a "value" */
+"Declarations" consist of a "property" and a "value"
+*** inline elements cannot specify height or width ***
+*/
 .class { /* can have multiple elements with same class, higher specificity than HTML element selectors */
   color: #0000FF;
 }
@@ -40,16 +43,45 @@ h1, .menu { /* multiple selectors */
 a:hover {
   color="blue";
 }
+a:visited {
+  color="green";
+}
 @media (min-width: 850px) {
   .header h1 {
     font-size: 120px;
   }
 }
 p { /* **** FlexBox START **** */
-  align-items: flex-start; /* aligns vertically => flex-end, center, baseline, stretch */
-  justify-content: flex-start; /* aligns horizontally => flex-end, center, space-between, space-around */
-
+  /* Flex "Containers" = display: flex; or inline-flex; and Flex "Items" // flex items shirt to fit container, but do not grow without flex-grow: 1; */
+  align-content: flex-start; /* CONTAINER // aligns vertically on multiple rows => flex-end; center; space-between; space-around; stretch; (default) */
+  align-items: flex-start; /* CONTAINER // aligns vertically in a single row => flex-end; center; baseline; stretch; (default) */
+  display: flex; /* CONTAINER // or inline-flex; */
+  flex: 1; /* flex-grow, flex-shrink, flex-basis shorthand // one column, or 2; two columns, or initial;  */
+    flex: 2 1 100px; /* grow, shrink, basis */
+    flex: 1 3; /* grow, shrink */
+    flex: 1 20px; /* grow, basis // cannot do shrink, basis only */
+  flex-basis: auto; /* ITEM width before it stretches or shrinks */
+  flex-direction: column; /* column-reverse; row; row-reverse; */
+  flex-flow: column;
+  flex-grow: 2; /* ITEM // default value = 0; */
+  flex-shrink: 3; /* ITEM // default value = 1; */
+  flex-wrap: wrap; /* CONTAINTER // nowrap (default); wrap-reverse; */
+  justify-content: flex-start; /* CONTAINER // aligns horizontally => flex-end, center, space-between, space-around */
 } /* **** FlexBox END **** */
+/* ****** Keyframes START ****** */
+#anim {
+  animation-name: colorful;
+  animation-duration: 3s;
+}
+@keyframes colorful {
+  0% {
+    background-color: blue;
+  }
+  100% {
+    background-color: yellow;
+  }
+}
+/* ****** Keyframes END ****** */
 p {
   background: url(http://images.com/image.jpg) no-repeat center center;
     /* Old browsers */
@@ -63,6 +95,7 @@ p {
   background-image: url("https://codecademy.com/image1.png");
   background-position: center;
   background-size: cover;
+  border: 3px solid white; /* width style color, defaults are medium none color (current element color)*/
   border-color: red;
   border-radius: 50%;
   border-style: solid;
@@ -70,6 +103,13 @@ p {
   bottom: 0px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);/* alpha 0 is invisible
   5 values are: offset-x, offset-y, blur-radius*, spread-radius*, color [* = optional] */
+  box-sizing: border-box; /* padding & border do not increase size */
+    /* * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    } */
+  clear: left; /* right; or both; to clear floated elements
   color: hsl(); /* forground, hue, saturation, lightness */
     color: hsl(0, 100%, 50%); /* red */
     color: hsl(60, 100%, 50%); /* yellow */
@@ -78,34 +118,43 @@ p {
     color: hsl(240, 100%, 50%); /* blue */
     color: hsl(300, 100%, 50%); /* magenta */
     /* hue = color, saturation = gray (100% = no grey), lightness = black (0%) or white (100%), 50% is normal */
+  column-count: 3;
+  column-gap: 1em;
   content: ""; /* must be defined for :before and :after, usually photo or text, but for shapes set to empty string "" */
   cursor: pointer;
-  display: block;
-  float: left; /* removes from normal flow, moved to left or right of containing element, commonly used with width: */
+  display: block; /* inline; inline-block (affected by vertical-align); none;(removes from flow) */
+  float: left; /* removes from normal flow, text wraps around (e.g. for images) moved to left or right of containing element, commonly used with width: */
   font-family: Helvetica, Monospace; /* default is Times New Roman */
   font-size: 30px;
-  font-style: italic; /* same as <em> */
+  font-style: italic; /* same as <em>, oblique; */
+  font-variant: small-caps; /* small caps */
   font-weight: 100; /* bold is same as <strong> */
-  height: 800px;
+  height: 800px; /* of content only, not padding, border, or margin */
   left: 0px;
   letter-spacing: 8px;
   line-height: 100px;
   list-style: none; /* square */
-  margin: 5px 6px 7px 8px; /* margin-top/right/bottom/left, margin: auto; to center block elements horizontally, can also center images (inline but can sitcho) */
+  margin: 5px 6px 7px 8px; /* margin-top/right/bottom/left, margin: auto; to center block elements horizontally (width must be set to use auto), can also center images (inline but can sitcho) // ***** vertical margins collapse (larger is used) but horizontal margins are combined ***** */
     margin: 0;
+  max-height: 300px;
   max-width: 940px;
+  min-height: 200px;
+  min-width: 600px;
   opacity: 0.5; /* 0 to 1 for 0% to 100%, applies to entire element */
+  overflow: scroll; /* hidden; visible;(default) => set on PARENT element to affect children, set to auto; to fix float issues {see clearfix hack} */
   padding: 5px 6px 7px 8px; /* padding-top/right/bottom/left */
-  position: relative; /* moves relative to it's position in the normal flow using left, right, top, bottom (px, %, em) */
-  position: absolute; /* removes from normal flow, locks in place relative to closest 'positioned' parent container (up to body), need, normally position: relative on parent container */
+  position: static; /* normal flow (default) */
+  position: relative; /* moves relative to it's position in the normal flow using left, right, top, bottom (px, %, em), NOT removed from normal flow */
+  position: absolute; /* (difficult for mobile dev) removes from normal flow, locks in place relative to closest 'positioned' (non-static) parent container (up to body), NEED (normally) position: relative on parent container */
   position: fixed; /* removes from normal flow, locks relative to browser window, does not move when scrolling */
   right: 0px;
   text-align: center; /* justify */
-  text-decoration: none; /* underline is same as <u>, line-through same as <del> */
+  text-decoration: none; /* underline is same as <u>, line-through same as <del>, overline; */
   text-transform: uppercase; /* lowercase, capitalize, initial, inherit, none */
   top: 20px;
   transform: scale(1.5); /* skewX(-32deg); skewY(10deg); */
   transition: background .5s;
-  width: 30px; /* 100%, em */
-  z-index: 1; /* later html itmes appear on top, highest # is on top */
+  width: 30px; /* 100%, em, (padding & border not counted), use box-sizing: border-box; instead */
+  word-spacing: 1px;
+  z-index: 1; /* later html itmes appear on top, highest # is on top, not for static elements, incredment by 5 (or 10) */
 }
