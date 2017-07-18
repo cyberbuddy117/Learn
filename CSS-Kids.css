@@ -46,6 +46,12 @@ a:hover {
 a:visited {
   color="green";
 }
+p:first-letter {
+  font-size: 30px;
+}
+p:first-line {
+  font-weight: 800;
+}
 @media (min-width: 850px) {
   .header h1 {
     font-size: 120px;
@@ -93,6 +99,7 @@ p {
     background: repeating-linear-gradient();
   background-color: silver; /* background */
   background-image: url("https://codecademy.com/image1.png");
+  background-image: linear-gradient(to bottom right, rgba(17, 255, 142, 0.3), rgba(30, 144, 255, 0.3))
   background-position: center;
   background-size: cover;
   border: 3px solid white; /* width style color, defaults are medium none color (current element color)*/
@@ -140,7 +147,7 @@ p {
   max-width: 940px;
   min-height: 200px;
   min-width: 600px;
-  opacity: 0.5; /* 0 to 1 for 0% to 100%, applies to entire element */
+  opacity: 0.5; /* 0 to 1 for 0% to 100%, applies to entire element including nested items */
   overflow: scroll; /* hidden; visible;(default) => set on PARENT element to affect children, set to auto; to fix float issues {see clearfix hack} */
   padding: 5px 6px 7px 8px; /* padding-top/right/bottom/left */
   position: static; /* normal flow (default) */
@@ -150,6 +157,8 @@ p {
   right: 0px;
   text-align: center; /* justify */
   text-decoration: none; /* underline is same as <u>, line-through same as <del>, overline; */
+  text-indent: 25px; /* indents first line */
+  text-shadow: 3px 2px 0px #ffa500, 6px 5px 0px #fff; /* x-axis y-axis blur color, shadows speerated by comma */
   text-transform: uppercase; /* lowercase, capitalize, initial, inherit, none */
   top: 20px;
   transform: scale(1.5); /* skewX(-32deg); skewY(10deg); */
